@@ -9,26 +9,35 @@
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.2/angular.js"></script>
   <script src="app.js"></script>
 </head>
-<body>
-      <!--  Comment Form -->
-      <form name="commentForm" ng-controller="MainController as mainCtrl" ng-submit="mainCtrl.addComment(comment)">
-        <!--  Live Preview -->
+<body ng-controller="ListController as listCtrl">
+    <!-- List -->
+    <ul>
+      <h4>Comments:</h4>
+      <li ng-repeat="comment in listCtrl.list">
         <blockquote>
-          {{mainCtrl.comment.body}}
-          <cite class="clearfix">—{{mainCtrl.comment.author}}</cite>
+          {{comment.body}}
+          <cite class="clearfix">— {{comment.author}}</cite>
         </blockquote>
-
-        <!--  Comment Form -->
-        <h4>Submit a Comment</h4>
-        <fieldset class="form-group">
-          <textarea ng-model="mainCtrl.comment.body" class="form-control" placeholder="Write a short comment..." title="Review"></textarea>
-        </fieldset>
-        <fieldset class="form-group">
-          <input ng-model="mainCtrl.comment.author" type="email" class="form-control" placeholder="test@example.org" title="Email" />
-        </fieldset>
-        <fieldset class="form-group">
-          <input type="submit" class="btn btn-primary pull-right" value="Submit Comment" />
-        </fieldset>
+      </li>
+    </ul>
+    <!--  Comment Form -->
+    <form name="commentForm" ng-controller="CommentController as commentCtrl" ng-submit="commentCtrl.addComment(listCtrl.list)">
+      <!--  Live Preview -->
+      <blockquote>
+        {{commentCtrl.comment.body}}
+        <cite class="clearfix">— {{commentCtrl.comment.author}}</cite>
+      </blockquote>
+      <!--  Comment Form -->
+      <h4>Submit a Comment</h4>
+      <fieldset class="form-group">
+        <textarea ng-model="commentCtrl.comment.body" class="form-control" placeholder="Write a short comment..." title="Review"></textarea>
+      </fieldset>
+      <fieldset class="form-group">
+        <input ng-model="commentCtrl.comment.author" type="email" class="form-control" placeholder="test@example.org" title="Email" />
+      </fieldset>
+      <fieldset class="form-group">
+        <input type="submit" class="btn btn-primary pull-right" value="Submit Comment" />
+      </fieldset>
     </form>
 </body>
 </html>
